@@ -1,25 +1,36 @@
-import {test} from '@playwright/test'
+import {test} from '@playwright/test';
 
 
-test('first test',({page})=>{
-    page.goto('http://localhost:4200')
-
+test.beforeEach(async ({page}) => {
+    await page.goto('http://localhost:4200/')
 })
-
 /*
-test.describe('test suite one',()=>{
-    console.log('first test')
+   test('navigate to Echarts', async ({page}) => {
+    await page.getByText('Charts').click()
+    await page.getByText('Echarts').click()
+})*/
 
-    test('first test',()=>{
-    console.log('first test')
+//test.describe('First Test Suite', () => {
+   /* test.beforeEach(async ({page}) => {
+        await page.getByText('Forms').click()
+    })*/
 
-})
 
-test('first test',()=>{
-    console.log('first test')
+    test('Navigate to Forms',async ({page}) => {
+        await page.getByText('Forms').click()
+        await page.getByText('Form Layouts').click()
+        await page.getByText('Datepicker').click()
+    })
+//}) 
 
-})
 
-})
-*/
+//test.describe('First second Suite', () => {
+    
+    test('navigate to Charts', async ({page}) => {
+        await page.getByText('Auth').click()
+        await page.getByText('Login').click()
+    })
+//}) 
+
+ 
 
