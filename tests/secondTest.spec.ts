@@ -13,7 +13,7 @@ test.beforeEach(async ({page}) => {
     //By tag name
     await page.locator('input').first().click()
     //By id
-    await page.locator('#inputEmail1').click()
+    await page.locator('#inputEmail1').click() //Test
     //By class name
     page.locator('.input-full-width')
     //By attribute name
