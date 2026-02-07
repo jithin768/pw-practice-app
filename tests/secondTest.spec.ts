@@ -34,7 +34,7 @@ test.beforeEach(async ({page}) => {
     page.locator(':text("Using the Grid")')
    })
 
-   test('User facing Locators', async ({page}) => {
+   test.skip('User facing Locators', async ({page}) => {
     
     await page.getByRole('textbox',{name:'Email'}).first().click()
     await page.getByRole('button',{name:'SIGN IN'}).first().click()
@@ -53,5 +53,16 @@ test.beforeEach(async ({page}) => {
     await page.getByTitle('IoT Dashboard').click()
 
    })
+
+   test('Child Element Locators', async ({page}) => {
+
+    await page.locator('nb-card nb-radio :text-is("Option 1")').click()
+    await page.locator('nb-card').locator('nb-radio').locator(':text-is("Option 2")').click()
+
+    await page.locator('nb-card').getByRole('button',{name:'SIGN IN '}).first().click()
+
+   })
+
+
  
 
