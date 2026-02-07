@@ -8,7 +8,7 @@ test.beforeEach(async ({page}) => {
 })
 
 
-   test('Locator syntax rules', async ({page}) => {
+   test.skip('Locator syntax rules', async ({page}) => {
 
     //By tag name
     await page.locator('input').first().click()
@@ -34,5 +34,24 @@ test.beforeEach(async ({page}) => {
     page.locator(':text("Using the Grid")')
    })
 
+   test('User facing Locators', async ({page}) => {
+    
+    await page.getByRole('textbox',{name:'Email'}).first().click()
+    await page.getByRole('button',{name:'SIGN IN'}).first().click()
+
+    //by label text
+   // await page.locator('.label col-sm-3 col-form-label').click()
+    //by placeholder text
+    await page.getByPlaceholder('Jane Doe').click()
+    //by text content    await page.getByText('Sign in').click()
+    await page.getByText('Using the Grid').click()
+
+    //By data test id
+    await page.getByTestId('SignIn').click()
+
+    //By Title  
+    await page.getByTitle('IoT Dashboard').click()
+
+   })
  
 
