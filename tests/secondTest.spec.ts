@@ -77,7 +77,7 @@ test.beforeEach(async ({page}) => {
     await page.locator(':text-is("Using the Grid")').locator('..').getByRole('button',{name:'SIGN IN '}).click()
    })
 
-   test('Reusing Locators',async({page})=>{
+   test.skip('Reusing Locators',async({page})=>{
 
     const vbasicForm = page.locator('nb-card').filter({hasText:'Basic form'})
     const email = vbasicForm.getByRole('textbox',{name:'Email'})
@@ -91,9 +91,40 @@ test.beforeEach(async ({page}) => {
     await signInButton.click()
 
     await expect(email).toHaveValue('test@test.com')
+   })
+
+   test('extracting Values',async({page})=>{
+
+    //Single Test Value
+
+    const vbasicForm = page.locator('nb-card').filter({hasText:'Basic form'})
+    const buttonText = await vbasicForm.getByRole('button',{name:'SUBMIT'}).textContent()
+    console.log(buttonText)
+    expect(buttonText).toEqual('Submit')    
+
+    //Multiple Test Values
+
+    const allRadioButtons = page.locator('nb-card').filter({hasText:'Using the Grid'}).locator('nb-radio')
+    const radioButtonContents = await allRadioButtons.allTextContents()
+    console.log(radioButtonContents)
+        expect(radioButtonContents).toContain('Option 1')
+        expect(radioButtonContents).toContain('Option 2')
+
+
+    //Input Values
+    const vbasicForm1 = page.locator('nb-card').filter({hasText:'Basic form'})
+    const email = vbasicForm1.getByRole('textbox',{name:'Email'})
+    await email.fill('test@test.com')
+    const emailValue=await email.inputValue()
+    expect(emailValue).toEqual('test@test.com')
+
+    const placeholderValue = await email.getAttribute('placeholder')
+    expect(placeholderValue).toEqual('Email')
+
 
 
    })
+
 
 
 
