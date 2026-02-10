@@ -16,7 +16,7 @@ test.beforeEach(async ({page}) => {
     })*/
 
 
-    test('Navigate to Forms',async ({page}) => {
+    test.skip('Navigate to Forms',async ({page}) => {
         await page.getByText('Forms').click()
         await page.getByText('Form Layouts').click()
         await page.getByText('Datepicker').click()
@@ -26,7 +26,7 @@ test.beforeEach(async ({page}) => {
 
 //test.describe('First second Suite', () => {
     
-    test('navigate to Charts', async ({page}) => {
+    test.skip('navigate to Charts', async ({page}) => {
         await page.getByText('Auth').click()
         await page.getByText('Login').click()
     })

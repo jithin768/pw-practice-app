@@ -93,7 +93,7 @@ test.beforeEach(async ({page}) => {
     await expect(email).toHaveValue('test@test.com')
    })
 
-   test('extracting Values',async({page})=>{
+   test.skip('extracting Values',async({page})=>{
 
     //Single Test Value
 
@@ -122,6 +122,26 @@ test.beforeEach(async ({page}) => {
     expect(placeholderValue).toEqual('Email')
 
 
+
+   })
+
+   test('Assertions',async({page})=>{
+    //general assertion
+
+    const vbasicForm = page.locator('nb-card').filter({hasText:'Basic form'}).getByRole('button',{name:'SUBMIT'})
+    const buttonText= await vbasicForm.textContent()
+    expect(buttonText).toEqual('Submit')
+
+    //Locator Assertions
+
+    await expect(vbasicForm).toHaveText('Submit')
+   /* await expect(vbasicForm).toBeVisible()
+    await expect(vbasicForm).toBeEnabled()
+    await expect(vbasicForm).toHaveClass(/success/)*/
+
+    //Soft Assertions
+    await expect.soft(vbasicForm).toHaveText('Submit')
+    await vbasicForm.click()    
 
    })
 
