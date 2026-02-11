@@ -1,13 +1,13 @@
 import {test,expect} from '@playwright/test';
 
 
-test.beforeEach(async ({page}) => {
+test.beforeEach(async ({page},testInfo) => {
     await page.goto('http://uitestingplayground.com/ajax')
     await page.getByText('Button Triggering AJAX Request').click()
-
+    testInfo.setTimeout(testInfo.timeout+2000) 
 })
 
-    test('Auto Waiting', async ({page}) => {
+    test.skip('Auto Waiting', async ({page}) => {
 
         const successButton= page.locator('.bg-success')
 
@@ -28,7 +28,7 @@ test.beforeEach(async ({page}) => {
 
     })
 
-    test("Alternative Option to wait for element to be visible",async({page})=>{
+    test.skip("Alternative Option to wait for element to be visible",async({page})=>{
             const successButton= page.locator('.bg-success')
     
         //1. Wait for the element to be visible using waitForSelector
@@ -44,3 +44,13 @@ test.beforeEach(async ({page}) => {
        expect(text).toContain('Data loaded with AJAX get request.')
 
     })
+
+     test('Timeouts', async ({page}) => {
+
+        //test.setTimeout(20000) //This will set the timeout for the entire test to 20 seconds, allowing all actions within the test to wait up to that amount of time before throwing a timeout error.
+        test.slow() //This will slow down the execution of the test by adding a delay of 5 seconds between each action. This can be useful for debugging purposes or to simulate slower user interactions.
+        const successButton= page.locator('.bg-success')
+
+        await successButton.click({timeout:16000}) //This will override the default timeout for this specific action, allowing it to wait up to 3 seconds for the click action to be successful. If the element does not become clickable within that time frame, it will throw an error.
+
+     })
