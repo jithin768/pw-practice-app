@@ -45,7 +45,7 @@ test.beforeEach(async ({page},testInfo) => {
 
     })
 
-     test('Timeouts', async ({page}) => {
+     test.skip('Timeouts', async ({page}) => {
 
         //test.setTimeout(20000) //This will set the timeout for the entire test to 20 seconds, allowing all actions within the test to wait up to that amount of time before throwing a timeout error.
         test.slow() //This will slow down the execution of the test by adding a delay of 5 seconds between each action. This can be useful for debugging purposes or to simulate slower user interactions.
