@@ -80,9 +80,23 @@ test('Tooltip', async ({page}) => {
 
     const tooltip=await page.locator('nb-tooltip').textContent()
     await expect(tooltip).toEqual('This is a tooltip')
+})
 
+test('dialog box', async ({page}) => {
+
+    await page.getByText('Tables & Data').click()
+    await page.getByText('Smart Table').click()
+
+    page.on('dialog', async dialog => {
+        expect(dialog.message()).toEqual('Are you sure you want to delete?')
+        await dialog.accept()
+    })
+    await page.getByRole('table').locator('tr',{hasText:'fat@yandex.ru'}).locator('.nb-trash').click()
+    await expect(page.locator('table tr').nth(1)).not.toHaveText('fat@yandex.ru')
 
 })
+
+
 
 
 
