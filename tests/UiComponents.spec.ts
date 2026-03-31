@@ -71,6 +71,19 @@ test('checkboxes', async ({page})=>{
     }
 })
 
+test('Tooltip', async ({page}) => {
+    await page.getByText('Modal & Overlays').click()
+    await page.getByText('Tooltip').click()
+
+    const toolTipText=page.locator('nb-card').filter({hasText:'Tooltip Placements'})
+    await page.getByRole('button',{name:'TOP'}).hover()
+
+    const tooltip=await page.locator('nb-tooltip').textContent()
+    await expect(tooltip).toEqual('This is a tooltip')
+
+
+})
+
 
 
 
